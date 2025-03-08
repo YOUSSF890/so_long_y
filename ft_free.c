@@ -6,7 +6,7 @@
 /*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 17:55:44 by ylagzoul          #+#    #+#             */
-/*   Updated: 2025/03/08 01:18:55 by ylagzoul         ###   ########.fr       */
+/*   Updated: 2025/03/08 15:30:59 by ylagzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,4 +88,3 @@ void	ft_free_node(t_game *game)
 	free(game->map);
 	free(game);
 }
-

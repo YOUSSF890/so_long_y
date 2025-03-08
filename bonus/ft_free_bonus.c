@@ -6,7 +6,7 @@
 /*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 17:55:44 by ylagzoul          #+#    #+#             */
-/*   Updated: 2025/03/08 00:17:32 by ylagzoul         ###   ########.fr       */
+/*   Updated: 2025/03/08 12:14:44 by ylagzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,7 @@ void	ft_free_strct(t_game *game)
 	free(game->ptr);
 	i = 0;
 	while (game->map[i])
-	{
-		free(game->map[i]);
-		i++;
-	}
+		free(game->map[i++]);
 	free(game->map);
 	free(game);
 	exit(1);

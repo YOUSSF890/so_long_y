@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/08 14:57:08 by ylagzoul          #+#    #+#             */
+/*   Updated: 2025/03/08 15:44:27 by ylagzoul         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long_bonus.h"
 
 char	*ft_strdup1(const char *s1);
@@ -6,13 +18,13 @@ void	ft_free_node(t_game *game);
 
 void	ft_ft(t_game *game, int y1, int x1)
 {
-	int nbr;
+	int	nbr;
 
-	if(game->map[y1][x1] != '1')
+	if (game->map[y1][x1] != '1')
 	{
 		if (game->map[y1][x1] == 'E' || game->map[y1][x1] == 'M')
 		{
-			nbr = Number_of_collectible(game->map);
+			nbr = number_of_collectible(game->map);
 			if (nbr == 0 || game->map[y1][x1] == 'M')
 			{
 				ft_free_xm_ym_n(game);
@@ -26,7 +38,7 @@ void	ft_ft(t_game *game, int y1, int x1)
 			game->y = y1;
 			game->x = x1;
 			game->map[y1][x1] = 'P';
-			printf("%d\n", game->steps); // peintf(); eroor | write();
+			printf("%d\n", game->steps);// peintf(); eroor | write();
 			game->steps = game->steps + 1;
 		}
 	}
@@ -42,14 +54,14 @@ int	moving(int key, t_game *game)
 			ft_free_strct(game);
 		}
 		else if (key == 100)
-				ft_ft(game, game->y,game->x + 1);
+			ft_ft(game, game->y, game->x + 1);
 		else if (key == 119)
-				ft_ft(game, game->y - 1,game->x);
+			ft_ft(game, game->y - 1, game->x);
 		else if (key == 97)
-				ft_ft(game, game->y,game->x - 1);
+			ft_ft(game, game->y, game->x - 1);
 		else if (key == 115)
-				ft_ft(game, game->y + 1, game->x);
-		ft_mlx_imag1(game, 0);
+			ft_ft(game, game->y + 1, game->x);
+		ft_mlx_imag1(game);
 	}
 	return (0);
 }
@@ -90,46 +102,35 @@ int	moving1(t_game *game)
 	a = strlenm(game);
 	while (i < a)
 	{
-		if (game->map[game->ym[i]][game->xm[i] + 1] == 'P' || game->map[game->ym[i]][game->xm[i] - 1] == 'P')
+		if (game->map[game->ym[i]][game->xm[i] + 1] == 'P'
+			|| game->map[game->ym[i]][game->xm[i] - 1] == 'P')
 			return (ft_free_xm_ym_n(game), ft_free_strct(game), 0);
 		if (game->map[game->ym[i]][game->xm[i] + 1] == '0' && game->n[i] == 1)
 			ft_ffftt(game, i, 2);
-		else if	(game->map[game->ym[i]][game->xm[i] - 1] == '0' && game->n[i] == 0)
+		else if (game->map[game->ym[i]][game->xm[i] - 1] == '0'
+				&& game->n[i] == 0)
 			ft_ffftt(game, i, 1);
 		else
 			ft_ffftt(game, i, 3);
 		i++;
 	}
-	ft_mlx_imag1(game,0);
+	ft_mlx_imag1(game);
 	i = 0;
 	while (i < 100000000)
 		i++;
 	return (0);
 }
 
-int	main(int ac, char *argv[])
+void	ft_game(t_game *game, int i)
 {
-	char	**string;
-	t_game	*game;
-	int		i;
-	int		a;
-	int		nbr;
+	int	a;
+	int	nbr;
 
-	if (ac < 2)
-		return (write (2, "Error\n No map file provided.\n", 29), 0); 
 	a = 0;
-	i = ft_file_len(argv[1]);
-	string = ft_handel(i, argv[1]);
-	if (!string)
-		return (0);
-	game = malloc(sizeof(t_game));
-	if (!game)
-		print_error("Error\nmalloc return NULL", string);
-	game->map = string;
-	Player_site(game);
+	player_site(game);
 	copy_map(game, i);
 	flood_file(game, game->y, game->x, &a);
-	nbr = Number_of_collectible(game->copy);
+	nbr = number_of_collectible(game->copy);
 	if (a == 0 || nbr != 0)
 	{
 		ft_free_node(game);
@@ -147,6 +148,25 @@ int	main(int ac, char *argv[])
 		ft_free_strct(game);
 	}
 	monster_site(game);
+}
+
+int	main(int ac, char *argv[])
+{
+	char	**string;
+	t_game	*game;
+	int		i;
+
+	if (ac < 2)
+		return (write(2, "Error\n No map file provided.\n", 29), 0);
+	i = ft_file_len(argv[1]);
+	string = ft_handel(i, argv[1]);
+	if (!string)
+		return (0);
+	game = malloc(sizeof(t_game));
+	if (!game)
+		print_error("Error\nmalloc return NULL", string);
+	game->map = string;
+	ft_game(game, i);
 	game->steps = 1;
 	mlx_loop_hook(game->ptr, moving1, game);
 	mlx_key_hook(game->win, moving, game);

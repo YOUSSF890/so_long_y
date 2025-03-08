@@ -6,13 +6,13 @@
 /*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 00:52:48 by ylagzoul          #+#    #+#             */
-/*   Updated: 2025/03/08 10:18:25 by ylagzoul         ###   ########.fr       */
+/*   Updated: 2025/03/08 13:55:16 by ylagzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long_bonus.h"
 
-char    *ft_strdup1(const char *s1)
+char	*ft_strdup1(const char *s1)
 {
 	int		i;
 	int		a;
@@ -20,8 +20,8 @@ char    *ft_strdup1(const char *s1)
 	char	*dst;
 
 	a = 0;
-	// if (!s1)
-	//     return (NULL);
+	if (!s1)
+		return (NULL);
 	while (s1[a])
 		a++;
 	len = a + 1;
@@ -38,7 +38,7 @@ char    *ft_strdup1(const char *s1)
 	return (dst);
 }
 
-int	Number_of_collectible(char **inpt)
+int	number_of_collectible(char	**inpt)
 {
 	int	i;
 	int	j;
@@ -61,7 +61,7 @@ int	Number_of_collectible(char **inpt)
 	return (a);
 }
 
-void	Player_site(t_game *inpt)
+void	player_site(t_game	*inpt)
 {
 	int	i;
 	int	j;
@@ -89,6 +89,7 @@ int	check_file_ber(char *inpt)
 	int		b;
 	int		a;
 	char	str[5] = ".ber";
+
 	i = 0;
 	b = 0;
 	a = 0;

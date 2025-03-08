@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/07 18:23:45 by ylagzoul          #+#    #+#             */
-/*   Updated: 2025/03/08 00:10:54 by ylagzoul         ###   ########.fr       */
+/*   Created: 2025/03/08 12:11:53 by ylagzoul          #+#    #+#             */
+/*   Updated: 2025/03/08 13:33:55 by ylagzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,11 @@ void	monster_site(t_game *game)
 	}
 }
 
-int	strlenm(t_game *game)
+int	strlenm(t_game	*game)
 {
-	int a;
-	int i;
-	int j;
+	int	a;
+	int	i;
+	int	j;
 
 	a = 0;
 	i = 0;
@@ -111,4 +111,21 @@ char	**ft_handel(int k, char *str1)
 	validate_map(str, i, 0, 0);
 	check_width(str, i);
 	return (str);
+}
+
+void	count_height_width(t_game *game)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (game->map[y])
+	{
+		x = 0;
+		while (game->map[y][x] && game->map[y][x] != '\n')
+			x++;
+		y++;
+	}
+	game->size_height = y * 64;
+	game->size_width = x * 64;
 }

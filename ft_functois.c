@@ -6,7 +6,7 @@
 /*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 18:23:45 by ylagzoul          #+#    #+#             */
-/*   Updated: 2025/03/08 01:22:42 by ylagzoul         ###   ########.fr       */
+/*   Updated: 2025/03/08 15:31:15 by ylagzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void	copy_map(t_game *game, int k)
 	game->copy[i] = NULL;
 }
 
-
 char	**ft_handel(int k, char *str1)
 {
 	int		fd;
@@ -64,4 +63,21 @@ char	**ft_handel(int k, char *str1)
 	validate_map(str, i, 0);
 	check_width(str, i);
 	return (str);
+}
+
+void	count_height_width(t_game *game)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (game->map[y])
+	{
+		x = 0;
+		while (game->map[y][x] && game->map[y][x] != '\n')
+			x++;
+		y++;
+	}
+	game->size_height = y * 64;
+	game->size_width = x * 64;
 }

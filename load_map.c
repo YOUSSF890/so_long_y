@@ -6,7 +6,7 @@
 /*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 21:08:16 by ylagzoul          #+#    #+#             */
-/*   Updated: 2025/03/08 01:15:35 by ylagzoul         ###   ########.fr       */
+/*   Updated: 2025/03/08 15:42:28 by ylagzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,9 @@ int	check_map(char *inpt)
 	i = 0;
 	while (inpt[i])
 	{
-		if (inpt[0] == '1' && ( inpt[i] == '1' || inpt[i] == '0' || inpt[i] == 'C'
-		|| inpt[i] == 'P' || inpt[i] == 'E' || (inpt[i] == '\n' && inpt[i-1] == '1')))
+		if (inpt[0] == '1' && (inpt[i] == '1' || inpt[i] == '0'
+				|| inpt[i] == 'C' || inpt[i] == 'P' || inpt[i] == 'E'
+				|| (inpt[i] == '\n' && inpt[i - 1] == '1')))
 			i++;
 		else
 			return (0);
@@ -103,7 +104,7 @@ void	validate_map(char **input, int k, int a)
 	{
 		if (check_map(input[i]))
 		{
-			if(i == 0 || (k - 1 == i && input[i]))
+			if (i == 0 || (k - 1 == i && input[i]))
 				check_wall(input[i], input);
 			j = j + check_player_and_exit_collectible(input[i], 'P');
 			t = t + check_player_and_exit_collectible(input[i], 'E');
@@ -114,5 +115,5 @@ void	validate_map(char **input, int k, int a)
 		i++;
 	}
 	if (j != 1 || t != 1 || a == 0)
-		print_error("Error\n Missing or incorrect count of player, exit, or collectibles.", input);
+		print_error("Error\n player or exit or collectibles.", input);
 }
