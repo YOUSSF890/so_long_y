@@ -1,6 +1,5 @@
 CC = cc
-CFLAGS = -Wall -Wextra  
-# -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror
 
 SRC = load_map.c flood_fill.c ft_mlx_imag.c \
 		Functions_are_not_included.c get_next_line.c \

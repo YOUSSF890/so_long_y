@@ -6,15 +6,13 @@
 /*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 14:47:08 by ylagzoul          #+#    #+#             */
-/*   Updated: 2025/03/08 15:30:14 by ylagzoul         ###   ########.fr       */
+/*   Updated: 2025/03/09 15:47:34 by ylagzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-char	*ft_strdup1(const char *s1);
 void	flood_file(t_game *game, int y, int x, int *a);
-void	ft_free_node(t_game *game);
 
 void	ft_putnbr(int n)
 {

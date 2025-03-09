@@ -6,7 +6,7 @@
 /*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 18:23:45 by ylagzoul          #+#    #+#             */
-/*   Updated: 2025/03/09 13:45:12 by ylagzoul         ###   ########.fr       */
+/*   Updated: 2025/03/09 15:51:39 by ylagzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ char	**ft_handel(int k, char *str1)
 
 	str = malloc (sizeof(char *) * (k + 1));
 	if (!str)
-		return (write (1, "Error\n main ft_handel str malloc", 33), NULL);
+		return (write (2, "Error\n main ft_handel str malloc", 33), NULL);
 	fd = open(str1, O_RDONLY);
 	if (fd == -1)
 		print_error3("Error\n Could not open the specified file.\n", str, fd);

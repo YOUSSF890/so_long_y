@@ -6,15 +6,15 @@
 /*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 14:57:08 by ylagzoul          #+#    #+#             */
-/*   Updated: 2025/03/09 12:41:24 by ylagzoul         ###   ########.fr       */
+/*   Updated: 2025/03/09 15:54:47 by ylagzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long_bonus.h"
 
-char	*ft_strdup1(const char *s1);
+// char	*ft_strdup1(const char *s1);
 void	flood_file(t_game *game, int y, int x, int *a);
-void	ft_free_node(t_game *game);
+// void	ft_free_node(t_game *game);
 
 void	ft_ft(t_game *game, int y1, int x1)
 {

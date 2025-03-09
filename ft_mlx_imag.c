@@ -6,7 +6,7 @@
 /*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 10:51:04 by ylagzoul          #+#    #+#             */
-/*   Updated: 2025/03/08 14:33:29 by ylagzoul         ###   ########.fr       */
+/*   Updated: 2025/03/09 15:55:58 by ylagzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	ft_mlx_xpm_file_to_image(t_game *game)
 	if (!game->player || !game->exit || !game->wall
 		|| !game->collectible || !game->empty)
 	{
-		write (1, "Error\n mlx_xpm_file_to_image", 29);
+		write (2, "Error\n mlx_xpm_file_to_image", 29);
 		ft_free_strct(game);
 	}
 	ft_mlx_imag1(game);
@@ -82,7 +82,7 @@ void	ft_mlx_imag(t_game *game)
 	if (!game->ptr)
 		return (write (2, "Error\nmlx_init return NULL", 26), ft_free_map(game));
 	game->win = mlx_new_window
-		(game->ptr, game->size_width, game->size_height, "so_long");
+		(game->ptr, game->size_width, game->size_height, "/so_long");
 	if (!game->win)
 	{
 		write(2, "Error\nmlx_new_window return NULL", 33);
