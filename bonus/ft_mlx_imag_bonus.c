@@ -6,7 +6,7 @@
 /*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 10:51:04 by ylagzoul          #+#    #+#             */
-/*   Updated: 2025/03/08 14:31:45 by ylagzoul         ###   ########.fr       */
+/*   Updated: 2025/03/09 13:36:43 by ylagzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,9 @@ void	ft_mlx_put_image_to_window(t_game *game, int x, int y)
 
 void	ft_mlx_imag1(t_game *game)
 {
-	int	x;
-	int y;
+	int		x;
+	int		y;
+	char	*moves;
 
 	x = 0;
 	y = 0;
@@ -52,6 +53,10 @@ void	ft_mlx_imag1(t_game *game)
 		}
 		y++;
 	}
+	moves = ft_itoa(game->steps);
+	if (game->c != 0)
+		mlx_string_put(game->ptr, game->win, 16, 30, 0xff0000, moves);
+	free(moves);
 }
 
 void	ft_mlx_xpm_file_to_image(t_game *game)

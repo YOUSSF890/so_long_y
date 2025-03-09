@@ -10,7 +10,7 @@ SRC = load_map.c flood_fill.c ft_mlx_imag.c \
 BSRC = bonus/load_map_bonus.c bonus/flood_fill_bonus.c bonus/ft_mlx_imag_bonus.c \
 		bonus/Functions_are_not_included_bonus.c bonus/get_next_line_bonus.c \
 		bonus/get_next_line_utils_bonus.c bonus/main_bonus.c bonus/ft_free_bonus.c\
-		bonus/ft_print_error_bonus.c bonus/ft_functois_bonus.c
+		bonus/ft_print_error_bonus.c bonus/ft_functois_bonus.c bonus/ft_itoa.c
 
 OBJ = $(SRC:%.c=%.o)
 BNAME = soolong

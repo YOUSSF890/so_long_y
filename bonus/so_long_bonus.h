@@ -6,7 +6,7 @@
 /*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 12:18:58 by ylagzoul          #+#    #+#             */
-/*   Updated: 2025/03/08 14:21:16 by ylagzoul         ###   ########.fr       */
+/*   Updated: 2025/03/09 13:46:22 by ylagzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct game
 	char	**copy;
 	int		x;
 	int		y;
+	int		c;
 	int		*n;
 	int		*xm;
 	int		*ym;
@@ -86,5 +87,10 @@ char	*get_next_line(int fd);
 char	**ft_handel(int k, char *str1);
 void	count_height_width(t_game *game);
 void	ft_mlx_put_image_to_window(t_game *game, int x, int y);
+int		close_window(t_game *game);
+char	*ft_itoa(int n);
+int		count_size(long int n);
+void	ft_game(t_game *game, int i);
+void	flood_file(t_game *game, int y, int x, int *a);
 
 #endif

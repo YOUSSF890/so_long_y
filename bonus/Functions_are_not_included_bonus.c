@@ -6,7 +6,7 @@
 /*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 00:52:48 by ylagzoul          #+#    #+#             */
-/*   Updated: 2025/03/08 13:55:16 by ylagzoul         ###   ########.fr       */
+/*   Updated: 2025/03/09 14:07:45 by ylagzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,11 +88,12 @@ int	check_file_ber(char *inpt)
 	int		i;
 	int		b;
 	int		a;
-	char	str[5] = ".ber";
+	char	*str;
 
 	i = 0;
 	b = 0;
 	a = 0;
+	str = ".ber";
 	while (inpt[i])
 		i++;
 	i = i - 4;

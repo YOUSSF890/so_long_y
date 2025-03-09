@@ -6,7 +6,7 @@
 /*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 14:57:08 by ylagzoul          #+#    #+#             */
-/*   Updated: 2025/03/08 15:44:27 by ylagzoul         ###   ########.fr       */
+/*   Updated: 2025/03/09 12:41:24 by ylagzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ void	ft_ft(t_game *game, int y1, int x1)
 			game->y = y1;
 			game->x = x1;
 			game->map[y1][x1] = 'P';
-			printf("%d\n", game->steps);// peintf(); eroor | write();
 			game->steps = game->steps + 1;
 		}
 	}
@@ -48,6 +47,7 @@ int	moving(int key, t_game *game)
 {
 	if (key == 115 || key == 119 || key == 100 || key == 97 || key == 65307)
 	{
+		game->c += 1;
 		if (key == 65307)
 		{
 			ft_free_xm_ym_n(game);
@@ -116,38 +116,9 @@ int	moving1(t_game *game)
 	}
 	ft_mlx_imag1(game);
 	i = 0;
-	while (i < 100000000)
+	while (i < 10000000)
 		i++;
 	return (0);
-}
-
-void	ft_game(t_game *game, int i)
-{
-	int	a;
-	int	nbr;
-
-	a = 0;
-	player_site(game);
-	copy_map(game, i);
-	flood_file(game, game->y, game->x, &a);
-	nbr = number_of_collectible(game->copy);
-	if (a == 0 || nbr != 0)
-	{
-		ft_free_node(game);
-		print_error2("Error\nThe Player can't win!\n");
-	}
-	ft_free_copy(game);
-	ft_mlx_imag(game);
-	a = strlenm(game);
-	game->xm = malloc(sizeof(int) * a);
-	game->ym = malloc(sizeof(int) * a);
-	game->n = malloc(sizeof(int) * a);
-	if (!game->xm || !game->ym || !game->n)
-	{
-		ft_free_xm_ym_n(game);
-		ft_free_strct(game);
-	}
-	monster_site(game);
 }
 
 int	main(int ac, char *argv[])
@@ -167,7 +138,9 @@ int	main(int ac, char *argv[])
 		print_error("Error\nmalloc return NULL", string);
 	game->map = string;
 	ft_game(game, i);
-	game->steps = 1;
+	game->steps = 0;
+	game->c = 0;
+	mlx_hook(game->win, 17, 0, close_window, game);
 	mlx_loop_hook(game->ptr, moving1, game);
 	mlx_key_hook(game->win, moving, game);
 	mlx_loop(game->ptr);

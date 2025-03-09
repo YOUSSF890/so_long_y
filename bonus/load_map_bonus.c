@@ -6,28 +6,11 @@
 /*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 12:29:53 by ylagzoul          #+#    #+#             */
-/*   Updated: 2025/03/08 12:29:55 by ylagzoul         ###   ########.fr       */
+/*   Updated: 2025/03/09 14:01:18 by ylagzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long_bonus.h"
-
-void	check_wall(char *inpt, char **str)
-{
-	int	a;
-	int	j;
-
-	a = 0;
-	j = 0;
-	while (inpt[j] && inpt[j] != '\n')
-	{
-		if (inpt[j] == '1')
-			a++;
-		j++;
-	}
-	if (a != j)
-		print_error("Error\n Map walls are not properly enclosed.", str);
-}
 
 int	check_map(char *inpt)
 {
@@ -37,8 +20,8 @@ int	check_map(char *inpt)
 	while (inpt[i])
 	{
 		if (inpt[0] == '1' && (inpt[i] == '1' || inpt[i] == '0'
-			|| inpt[i] == 'C' || inpt[i] == 'M' || inpt[i] == 'P'
-			|| inpt[i] == 'E' || (inpt[i] == '\n' && inpt[i - 1] == '1')))
+				|| inpt[i] == 'C' || inpt[i] == 'M' || inpt[i] == 'P'
+				|| inpt[i] == 'E' || (inpt[i] == '\n' && inpt[i - 1] == '1')))
 			i++;
 		else
 			return (0);
@@ -62,33 +45,48 @@ int	check_player_and_exit_collectible(char *inpt, char c)
 	return (a);
 }
 
+void	check1(int *t, char **inpt, int i)
+{
+	int	j;
+
+	j = 0;
+	while (i > 1)
+	{
+		if (t[j] != t[j + 1])
+		{
+			free(t);
+			print_error("Error\n Inconsistent map width detected.", inpt);
+		}
+		j++;
+		i--;
+	}
+}
+
 void	check_width(char **inpt, int k)
 {
+	int	*t;
 	int	i;
 	int	j;
-	int	t[k];
 
 	i = 0;
+	t = malloc(sizeof(int) * k);
 	while (inpt[i])
 	{
 		j = 0;
 		while (inpt[i][j])
 			j++;
 		if (j > 61)
-			print_error("Error\n Map width exceeds 51 characters.", inpt);
+		{
+			free(t);
+			print_error("Error\n Map width exceeds 61 characters.", inpt);
+		}
 		if (inpt[i][j - 1] != '\n')
 			j++;
 		t[i] = j;
 		i++;
 	}
-	j = 0;
-	while (i > 1)
-	{
-		if (t[j] != t[j + 1])
-			print_error("Error\n Inconsistent map width detected.", inpt);
-		j++;
-		i--;
-	}
+	check1(t, inpt, i);
+	free(t);
 }
 
 void	validate_map(char **input, int k, int a, int q)
