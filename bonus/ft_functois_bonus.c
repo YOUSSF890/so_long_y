@@ -6,7 +6,7 @@
 /*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 12:11:53 by ylagzoul          #+#    #+#             */
-/*   Updated: 2025/03/09 15:53:04 by ylagzoul         ###   ########.fr       */
+/*   Updated: 2025/03/09 18:14:08 by ylagzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	copy_map(t_game *game, int k)
 	game->copy = malloc(sizeof(char *) * (k + 1));
 	if (!game->copy)
 	{
-		write(2, "Error\nmalloc return NULL", 24);
+		write(2, "Error\nmalloc return NULL\n", 26);
 		ft_free_map(game);
 	}
 	while (game->map[i])
@@ -93,7 +93,7 @@ char	**ft_handel(int k, char *str1)
 
 	str = malloc (sizeof(char *) * (k + 1));
 	if (!str)
-		return (write (2, "Error\n main ft_handel str malloc", 33), NULL);
+		return (write (2, "Error\n main ft_handel str malloc\n", 34), NULL);
 	fd = open(str1, O_RDONLY);
 	if (fd == -1)
 		print_error3("Error\n Could not open the specified file.\n", str, fd);

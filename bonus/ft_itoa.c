@@ -6,7 +6,7 @@
 /*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 12:31:59 by ylagzoul          #+#    #+#             */
-/*   Updated: 2025/03/09 13:56:35 by ylagzoul         ###   ########.fr       */
+/*   Updated: 2025/03/09 18:14:28 by ylagzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ int	close_window(t_game *game)
 {
 	ft_free_xm_ym_n(game);
 	ft_free_strct(game);
+	exit(0);
 	return (0);
 }
 
@@ -79,8 +80,8 @@ void	ft_game(t_game *game, int i)
 	game->n = malloc(sizeof(int) * a);
 	if (!game->xm || !game->ym || !game->n)
 	{
-		ft_free_xm_ym_n(game);
-		ft_free_strct(game);
+		print_error2("Error\nft_game malloc xm or ym or n\n");
+		a = close_window(game);
 	}
 	monster_site(game);
 }
@@ -99,5 +100,5 @@ void	check_wall(char *inpt, char **str)
 		j++;
 	}
 	if (a != j)
-		print_error("Error\n Map walls are not properly enclosed.", str);
+		print_error("Error\n Map walls are not properly enclosed.\n", str);
 }

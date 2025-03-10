@@ -12,7 +12,7 @@ BSRC = bonus/load_map_bonus.c bonus/flood_fill_bonus.c bonus/ft_mlx_imag_bonus.c
 		bonus/ft_print_error_bonus.c bonus/ft_functois_bonus.c bonus/ft_itoa.c
 
 OBJ = $(SRC:%.c=%.o)
-BNAME = soolong
+BNAME = so_long_bonus
 NAME = so_long
 HFILE = so_long.h
 HEADERFILEB =  bonus/so_long_bonus.h

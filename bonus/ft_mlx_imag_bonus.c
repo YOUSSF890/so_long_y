@@ -6,7 +6,7 @@
 /*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 10:51:04 by ylagzoul          #+#    #+#             */
-/*   Updated: 2025/03/09 13:36:43 by ylagzoul         ###   ########.fr       */
+/*   Updated: 2025/03/09 18:15:09 by ylagzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,22 +65,23 @@ void	ft_mlx_xpm_file_to_image(t_game *game)
 	int	y;
 
 	game->wall = mlx_xpm_file_to_image
-		(game->ptr, "bonus/textures/wall_imag.xpm", &x, &y);
+		(game->ptr, "textures/wall_imag.xpm", &x, &y);
 	game->player = mlx_xpm_file_to_image
-		(game->ptr, "bonus/textures/player.xpm", &x, &y);
+		(game->ptr, "textures/player.xpm", &x, &y);
 	game->collectible = mlx_xpm_file_to_image
-		(game->ptr, "bonus/textures/collectible_imag.xpm", &x, &y);
+		(game->ptr, "textures/collectible_imag.xpm", &x, &y);
 	game->exit = mlx_xpm_file_to_image
-		(game->ptr, "bonus/textures/exit_imag.xpm", &x, &y);
+		(game->ptr, "textures/exit_imag.xpm", &x, &y);
 	game->empty = mlx_xpm_file_to_image
-		(game->ptr, "bonus/textures/empty.xpm", &x, &y);
+		(game->ptr, "textures/empty.xpm", &x, &y);
 	game->right = mlx_xpm_file_to_image
-		(game->ptr, "bonus/textures/right1.xpm", &x, &y);
+		(game->ptr, "textures/right1.xpm", &x, &y);
 	if (!game->player || !game->exit || !game->wall
 		|| !game->collectible || !game->empty || !game->right)
 	{
-		write (1, "Error\n mlx_xpm_file_to_image", 29);
+		write (1, "Error\n mlx_xpm_file_to_image\n", 30);
 		ft_free_strct(game);
+		exit(1);
 	}
 	ft_mlx_imag1(game);
 }
@@ -90,12 +91,12 @@ void	ft_mlx_imag(t_game *game)
 	count_height_width(game);
 	game->ptr = mlx_init();
 	if (!game->ptr)
-		return (write (2, "Error\nmlx_init return NULL", 26), ft_free_map(game));
+		return (write (2, "Error\nmlx_init return NULL\n", 28), ft_free_map(game));
 	game->win = mlx_new_window
-		(game->ptr, game->size_width, game->size_height, "so_long");
+		(game->ptr, game->size_width, game->size_height, "/so_long");
 	if (!game->win)
 	{
-		write(2, "Error\nmlx_new_window return NULL", 33);
+		write(2, "Error\nmlx_new_window return NULL\n", 34);
 		mlx_destroy_display(game->ptr);
 		free(game->ptr);
 		ft_free_map(game);

@@ -6,7 +6,7 @@
 /*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 21:08:16 by ylagzoul          #+#    #+#             */
-/*   Updated: 2025/03/09 14:05:34 by ylagzoul         ###   ########.fr       */
+/*   Updated: 2025/03/09 18:13:23 by ylagzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	check1(int *t, char **inpt, int i)
 		if (t[j] != t[j + 1])
 		{
 			free(t);
-			print_error("Error\n Inconsistent map width detected.", inpt);
+			print_error("Error\n Inconsistent map width detected.\n", inpt);
 		}
 		j++;
 		i--;
@@ -78,7 +78,7 @@ void	check_width(char **inpt, int k)
 		if (j > 61)
 		{
 			free(t);
-			print_error("Error\n Map width exceeds 61 characters.", inpt);
+			print_error("Error\n Map width exceeds 61 characters.\n", inpt);
 		}
 		if (inpt[i][j - 1] != '\n')
 			j++;
@@ -109,9 +109,9 @@ void	validate_map(char **input, int k, int a)
 			a = a + check_player_and_exit_collectible(input[i], 'C');
 		}
 		else
-			print_error("Error\n Invalid map structure.", input);
+			print_error("Error\n Invalid map structure.\n", input);
 		i++;
 	}
 	if (j != 1 || t != 1 || a == 0)
-		print_error("Error\n player or exit or collectibles.", input);
+		print_error("Error\n player or exit or collectibles.\n", input);
 }

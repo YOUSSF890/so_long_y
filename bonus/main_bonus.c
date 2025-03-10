@@ -6,15 +6,13 @@
 /*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 14:57:08 by ylagzoul          #+#    #+#             */
-/*   Updated: 2025/03/09 15:54:47 by ylagzoul         ###   ########.fr       */
+/*   Updated: 2025/03/10 11:54:05 by ylagzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long_bonus.h"
 
-// char	*ft_strdup1(const char *s1);
 void	flood_file(t_game *game, int y, int x, int *a);
-// void	ft_free_node(t_game *game);
 
 void	ft_ft(t_game *game, int y1, int x1)
 {
@@ -29,6 +27,7 @@ void	ft_ft(t_game *game, int y1, int x1)
 			{
 				ft_free_xm_ym_n(game);
 				ft_free_strct(game);
+				exit(0);
 			}
 			return ;
 		}
@@ -52,6 +51,7 @@ int	moving(int key, t_game *game)
 		{
 			ft_free_xm_ym_n(game);
 			ft_free_strct(game);
+			exit(0);
 		}
 		else if (key == 100)
 			ft_ft(game, game->y, game->x + 1);
@@ -93,18 +93,21 @@ void	ft_ffftt(t_game *game, int i, int a)
 	}
 }
 
-int	moving1(t_game *game)
+int	moving_enemy(t_game *game)
 {
 	int	i;
 	int	a;
+	static int tem;
 
 	i = 0;
 	a = strlenm(game);
+	if (tem % 1000 != 0)
+		return (tem++, 0);
 	while (i < a)
 	{
 		if (game->map[game->ym[i]][game->xm[i] + 1] == 'P'
 			|| game->map[game->ym[i]][game->xm[i] - 1] == 'P')
-			return (ft_free_xm_ym_n(game), ft_free_strct(game), 0);
+			return (ft_free_xm_ym_n(game), ft_free_strct(game), exit(0), 0);
 		if (game->map[game->ym[i]][game->xm[i] + 1] == '0' && game->n[i] == 1)
 			ft_ffftt(game, i, 2);
 		else if (game->map[game->ym[i]][game->xm[i] - 1] == '0'
@@ -114,11 +117,9 @@ int	moving1(t_game *game)
 			ft_ffftt(game, i, 3);
 		i++;
 	}
-	ft_mlx_imag1(game);
-	i = 0;
-	while (i < 10000000)
-		i++;
-	return (0);
+	if (tem == 500000)
+		tem = 1000;
+	return (ft_mlx_imag1(game), tem++, 0);
 }
 
 int	main(int ac, char *argv[])
@@ -135,15 +136,16 @@ int	main(int ac, char *argv[])
 		return (0);
 	game = malloc(sizeof(t_game));
 	if (!game)
-		print_error("Error\nmalloc return NULL", string);
+		print_error("Error\nmalloc return NULL\n", string);
 	game->map = string;
 	ft_game(game, i);
 	game->steps = 0;
 	game->c = 0;
 	mlx_hook(game->win, 17, 0, close_window, game);
-	mlx_loop_hook(game->ptr, moving1, game);
-	mlx_key_hook(game->win, moving, game);
+	mlx_hook(game->win, 2, 1L, moving, game);
+	mlx_loop_hook(game->ptr, moving_enemy, game);
 	mlx_loop(game->ptr);
 	ft_free_xm_ym_n(game);
 	ft_free_strct(game);
+	exit(0);
 }

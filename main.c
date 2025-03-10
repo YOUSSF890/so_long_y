@@ -6,7 +6,7 @@
 /*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 14:47:08 by ylagzoul          #+#    #+#             */
-/*   Updated: 2025/03/09 15:47:34 by ylagzoul         ###   ########.fr       */
+/*   Updated: 2025/03/09 17:41:37 by ylagzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	ft_ft(t_game *game, int y1, int x1)
 			if (nbr == 0)
 			{
 				ft_free_strct(game);
+				exit(0);
 			}
 			return ;
 		}
@@ -64,7 +65,10 @@ int	moving(int key, t_game *game)
 	if (key == 115 || key == 119 || key == 100 || key == 97 || key == 65307)
 	{
 		if (key == 65307)
+		{
 			ft_free_strct(game);
+			exit(0);
+		}
 		else if (key == 100)
 			ft_ft(game, game->y, game->x + 1);
 		else if (key == 119)
@@ -95,6 +99,12 @@ void	ft_game(t_game *game, int i)
 	}
 	ft_free_copy(game);
 }
+int	close_window(t_game *game)
+{
+	ft_free_strct(game);
+	exit(0);
+	return (0);
+}
 
 int	main(int ac, char *argv[])
 {
@@ -115,7 +125,9 @@ int	main(int ac, char *argv[])
 	ft_game(game, i);
 	ft_mlx_imag(game);
 	game->steps = 1;
+	mlx_hook(game->win, 17, 0, close_window, game);
 	mlx_key_hook(game->win, moving, game);
 	mlx_loop(game->ptr);
 	ft_free_strct(game);
+	exit(0);
 }
