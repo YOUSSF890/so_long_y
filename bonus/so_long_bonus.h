@@ -6,7 +6,7 @@
 /*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 12:18:58 by ylagzoul          #+#    #+#             */
-/*   Updated: 2025/03/09 13:46:22 by ylagzoul         ###   ########.fr       */
+/*   Updated: 2025/03/10 13:45:08 by ylagzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,11 @@ typedef struct game
 	void	*win;
 	void	*wall;
 	void	*player;
+	void	*collectible0;
 	void	*collectible;
+	void	*collectible1;
+	void	*collectible2;
+	void	*collectible3;
 	void	*exit;
 	void	*empty;
 	void	*right;
@@ -92,5 +96,6 @@ char	*ft_itoa(int n);
 int		count_size(long int n);
 void	ft_game(t_game *game, int i);
 void	flood_file(t_game *game, int y, int x, int *a);
+void ft_animate_collectible(t_game * game);
 
 #endif

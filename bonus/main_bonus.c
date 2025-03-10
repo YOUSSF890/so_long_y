@@ -6,7 +6,7 @@
 /*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 14:57:08 by ylagzoul          #+#    #+#             */
-/*   Updated: 2025/03/10 11:54:05 by ylagzoul         ###   ########.fr       */
+/*   Updated: 2025/03/10 14:56:15 by ylagzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,20 @@ void	ft_ffftt(t_game *game, int i, int a)
 	}
 }
 
+void ft_enemy(t_game *game, int i)
+{
+	if (game->map[game->ym[i]][game->xm[i] + 1] == 'P'
+		|| game->map[game->ym[i]][game->xm[i] - 1] == 'P')
+		return (ft_free_xm_ym_n(game), ft_free_strct(game), exit(0));
+	if (game->map[game->ym[i]][game->xm[i] + 1] == '0' && game->n[i] == 1)
+		ft_ffftt(game, i, 2);
+	else if (game->map[game->ym[i]][game->xm[i] - 1] == '0'
+			&& game->n[i] == 0)
+		ft_ffftt(game, i, 1);
+	else
+		ft_ffftt(game, i, 3);
+}
+
 int	moving_enemy(t_game *game)
 {
 	int	i;
@@ -105,21 +119,31 @@ int	moving_enemy(t_game *game)
 		return (tem++, 0);
 	while (i < a)
 	{
-		if (game->map[game->ym[i]][game->xm[i] + 1] == 'P'
-			|| game->map[game->ym[i]][game->xm[i] - 1] == 'P')
-			return (ft_free_xm_ym_n(game), ft_free_strct(game), exit(0), 0);
-		if (game->map[game->ym[i]][game->xm[i] + 1] == '0' && game->n[i] == 1)
-			ft_ffftt(game, i, 2);
-		else if (game->map[game->ym[i]][game->xm[i] - 1] == '0'
-				&& game->n[i] == 0)
-			ft_ffftt(game, i, 1);
-		else
-			ft_ffftt(game, i, 3);
+		ft_enemy(game, i);
 		i++;
 	}
 	if (tem == 500000)
 		tem = 1000;
+	ft_animate_collectible(game);
 	return (ft_mlx_imag1(game), tem++, 0);
+}
+
+void ft_animate_collectible(t_game * game)
+{
+	if (game->collectible == game->collectible0)
+	{
+		game->collectible0 = game->collectible1;
+	}
+	else if (game->collectible1 == game->collectible0)
+	{
+		game->collectible0 = game->collectible2;
+	}
+	else if (game->collectible2 == game->collectible0)
+	{
+		game->collectible0 = game->collectible3;
+	}
+	else
+		game->collectible0 = game->collectible;
 }
 
 int	main(int ac, char *argv[])
@@ -138,9 +162,9 @@ int	main(int ac, char *argv[])
 	if (!game)
 		print_error("Error\nmalloc return NULL\n", string);
 	game->map = string;
-	ft_game(game, i);
 	game->steps = 0;
 	game->c = 0;
+	ft_game(game, i);
 	mlx_hook(game->win, 17, 0, close_window, game);
 	mlx_hook(game->win, 2, 1L, moving, game);
 	mlx_loop_hook(game->ptr, moving_enemy, game);

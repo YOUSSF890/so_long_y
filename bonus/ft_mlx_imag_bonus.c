@@ -6,7 +6,7 @@
 /*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 10:51:04 by ylagzoul          #+#    #+#             */
-/*   Updated: 2025/03/09 18:15:09 by ylagzoul         ###   ########.fr       */
+/*   Updated: 2025/03/10 15:56:13 by ylagzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	ft_mlx_put_image_to_window(t_game *game, int x, int y)
 	(game->ptr, game->win, game->player, x * SIZE, y * SIZE);
 	else if (game->map[y][x] == 'C')
 		mlx_put_image_to_window
-	(game->ptr, game->win, game->collectible, x * SIZE, y * SIZE);
+	(game->ptr, game->win, game->collectible0, x * SIZE, y * SIZE);
 	else if (game->map[y][x] == 'E')
 		mlx_put_image_to_window
 	(game->ptr, game->win, game->exit, x * SIZE, y * SIZE);
@@ -53,10 +53,28 @@ void	ft_mlx_imag1(t_game *game)
 		}
 		y++;
 	}
+	// exit(0);
 	moves = ft_itoa(game->steps);
 	if (game->c != 0)
 		mlx_string_put(game->ptr, game->win, 16, 30, 0xff0000, moves);
 	free(moves);
+}
+void ft_imag_collectible(t_game *game)
+{
+	int	x;
+	int	y;
+	
+	x = 0;
+	y = 0;
+	game->collectible = mlx_xpm_file_to_image
+		(game->ptr, "textures/collectible_imag.xpm", &x, &y);
+	game->collectible1 = mlx_xpm_file_to_image
+		(game->ptr, "textures/collectible1_imag.xpm", &x, &y);
+	game->collectible2 = mlx_xpm_file_to_image
+		(game->ptr, "textures/collectible2_imag.xpm", &x, &y);
+	game->collectible3 = mlx_xpm_file_to_image
+		(game->ptr, "textures/collectible3_imag.xpm", &x, &y);
+	game->collectible0 = game->collectible;
 }
 
 void	ft_mlx_xpm_file_to_image(t_game *game)
@@ -64,20 +82,22 @@ void	ft_mlx_xpm_file_to_image(t_game *game)
 	int	x;
 	int	y;
 
+	x = 0;
+	y = 0;
 	game->wall = mlx_xpm_file_to_image
 		(game->ptr, "textures/wall_imag.xpm", &x, &y);
 	game->player = mlx_xpm_file_to_image
 		(game->ptr, "textures/player.xpm", &x, &y);
-	game->collectible = mlx_xpm_file_to_image
-		(game->ptr, "textures/collectible_imag.xpm", &x, &y);
 	game->exit = mlx_xpm_file_to_image
 		(game->ptr, "textures/exit_imag.xpm", &x, &y);
 	game->empty = mlx_xpm_file_to_image
 		(game->ptr, "textures/empty.xpm", &x, &y);
 	game->right = mlx_xpm_file_to_image
 		(game->ptr, "textures/right1.xpm", &x, &y);
+	ft_imag_collectible(game);
 	if (!game->player || !game->exit || !game->wall
-		|| !game->collectible || !game->empty || !game->right)
+		|| !game->collectible || !game->empty || !game->right 
+		|| !game->collectible1 || !game->collectible2 || !game->collectible3)
 	{
 		write (1, "Error\n mlx_xpm_file_to_image\n", 30);
 		ft_free_strct(game);
