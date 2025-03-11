@@ -1,6 +1,5 @@
 CC = cc
-CFLAGS = -Wall -Wextra
-#  -Werror
+CFLAGS = -Wall -Wextra -Werror
 
 SRC = load_map.c flood_fill.c ft_mlx_imag.c \
 		Functions_are_not_included.c get_next_line.c \
@@ -10,13 +9,14 @@ SRC = load_map.c flood_fill.c ft_mlx_imag.c \
 BSRC = bonus/load_map_bonus.c bonus/flood_fill_bonus.c bonus/ft_mlx_imag_bonus.c \
 		bonus/Functions_are_not_included_bonus.c bonus/get_next_line_bonus.c \
 		bonus/get_next_line_utils_bonus.c bonus/main_bonus.c bonus/ft_free_bonus.c\
-		bonus/ft_print_error_bonus.c bonus/ft_functois_bonus.c bonus/ft_itoa.c
+		bonus/ft_print_error_bonus.c bonus/ft_functois_bonus.c bonus/ft_itoa.c \
+		bonus/ft_functois_norm.c
 
 OBJ = $(SRC:%.c=%.o)
 BNAME = so_long_bonus
 NAME = so_long
 HFILE = so_long.h
-HEADERFILEB =  bonus/so_long_bonus.h
+HEADERFILEB =  bonus/so_long_bonus.h 
 BOBJF=$(BSRC:%.c=%.o)
 
 all: $(NAME)

@@ -6,7 +6,7 @@
 /*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 18:23:45 by ylagzoul          #+#    #+#             */
-/*   Updated: 2025/03/09 18:12:02 by ylagzoul         ###   ########.fr       */
+/*   Updated: 2025/03/11 13:33:20 by ylagzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char	**ft_handel(int k, char *str1)
 		return (write (2, "Error\n main ft_handel str malloc\n", 34), NULL);
 	fd = open(str1, O_RDONLY);
 	if (fd == -1)
-		print_error3("Error\n Could not open the specified file.\n", str, fd);
+		return (write(2, "Error\n Could not open\n", 23), free(str), NULL);
 	line = get_next_line(fd);
 	if (!line)
 		print_error3("Error\n Empty or unreadable file.\n", str, fd);

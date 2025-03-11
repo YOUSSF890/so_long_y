@@ -6,7 +6,7 @@
 /*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 12:10:42 by ylagzoul          #+#    #+#             */
-/*   Updated: 2025/03/09 18:10:39 by ylagzoul         ###   ########.fr       */
+/*   Updated: 2025/03/10 17:18:03 by ylagzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,11 @@ void	check_wall(char *inpt, char **str)
 	}
 	if (a != j)
 		print_error("Error\n Map walls are not properly enclosed.\n", str);
+}
+
+int	close_window(t_game *game)
+{
+	ft_free_strct(game);
+	exit(0);
+	return (0);
 }

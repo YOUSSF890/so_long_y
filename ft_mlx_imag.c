@@ -6,7 +6,7 @@
 /*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 10:51:04 by ylagzoul          #+#    #+#             */
-/*   Updated: 2025/03/09 18:11:40 by ylagzoul         ###   ########.fr       */
+/*   Updated: 2025/03/10 17:19:53 by ylagzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,10 @@ void	ft_mlx_imag(t_game *game)
 	count_height_width(game);
 	game->ptr = mlx_init();
 	if (!game->ptr)
-		return (write (2, "Error\nmlx_init return NULL\n", 28), ft_free_map(game));
+	{
+		write (2, "Error\nmlx_init return NULL\n", 28);
+		ft_free_map(game);
+	}
 	game->win = mlx_new_window
 		(game->ptr, game->size_width, game->size_height, "/so_long");
 	if (!game->win)

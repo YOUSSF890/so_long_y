@@ -6,7 +6,7 @@
 /*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 18:03:42 by ylagzoul          #+#    #+#             */
-/*   Updated: 2025/03/08 01:05:07 by ylagzoul         ###   ########.fr       */
+/*   Updated: 2025/03/11 12:41:29 by ylagzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,6 @@ void	print_error3(char *inpt, char **str, int fd)
 	while (inpt[i])
 	{
 		write (2, &inpt[i], 1);
-		i++;
-	}
-	i = 0;
-	while (str[i])
-	{
-		free(str[i]);
 		i++;
 	}
 	free(str);

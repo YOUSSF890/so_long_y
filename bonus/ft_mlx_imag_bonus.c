@@ -6,7 +6,7 @@
 /*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 10:51:04 by ylagzoul          #+#    #+#             */
-/*   Updated: 2025/03/10 15:56:13 by ylagzoul         ###   ########.fr       */
+/*   Updated: 2025/03/11 11:53:34 by ylagzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,17 +53,17 @@ void	ft_mlx_imag1(t_game *game)
 		}
 		y++;
 	}
-	// exit(0);
 	moves = ft_itoa(game->steps);
 	if (game->c != 0)
 		mlx_string_put(game->ptr, game->win, 16, 30, 0xff0000, moves);
 	free(moves);
 }
-void ft_imag_collectible(t_game *game)
+
+void	ft_imag_collectible(t_game *game)
 {
 	int	x;
 	int	y;
-	
+
 	x = 0;
 	y = 0;
 	game->collectible = mlx_xpm_file_to_image
@@ -96,7 +96,7 @@ void	ft_mlx_xpm_file_to_image(t_game *game)
 		(game->ptr, "textures/right1.xpm", &x, &y);
 	ft_imag_collectible(game);
 	if (!game->player || !game->exit || !game->wall
-		|| !game->collectible || !game->empty || !game->right 
+		|| !game->collectible || !game->empty || !game->right
 		|| !game->collectible1 || !game->collectible2 || !game->collectible3)
 	{
 		write (1, "Error\n mlx_xpm_file_to_image\n", 30);
@@ -111,7 +111,10 @@ void	ft_mlx_imag(t_game *game)
 	count_height_width(game);
 	game->ptr = mlx_init();
 	if (!game->ptr)
-		return (write (2, "Error\nmlx_init return NULL\n", 28), ft_free_map(game));
+	{
+		write (2, "Error\nmlx_init return NULL\n", 28);
+		ft_free_map(game);
+	}
 	game->win = mlx_new_window
 		(game->ptr, game->size_width, game->size_height, "/so_long");
 	if (!game->win)

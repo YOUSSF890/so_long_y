@@ -6,7 +6,7 @@
 /*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 00:52:48 by ylagzoul          #+#    #+#             */
-/*   Updated: 2025/03/09 14:07:45 by ylagzoul         ###   ########.fr       */
+/*   Updated: 2025/03/11 10:31:00 by ylagzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ int	ft_file_len(char *str)
 	{
 		free(line);
 		if (i > 32)
-			print_error1("Error\n Map height exceeds 32 ines.\n", fd);
+			print_error1("Error\n Map height exceeds 32 lines.\n", fd);
 		line = get_next_line(fd);
 		i++;
 	}

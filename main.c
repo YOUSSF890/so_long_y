@@ -6,7 +6,7 @@
 /*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 14:47:08 by ylagzoul          #+#    #+#             */
-/*   Updated: 2025/03/10 15:25:17 by ylagzoul         ###   ########.fr       */
+/*   Updated: 2025/03/10 17:18:12 by ylagzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,12 +98,6 @@ void	ft_game(t_game *game, int i)
 		print_error2("Error\n The Player can't win!\n");
 	}
 	ft_free_copy(game);
-}
-int	close_window(t_game *game)
-{
-	ft_free_strct(game);
-	exit(0);
-	return (0);
 }
 
 int	main(int ac, char *argv[])

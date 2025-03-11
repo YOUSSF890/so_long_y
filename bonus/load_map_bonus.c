@@ -6,7 +6,7 @@
 /*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 12:29:53 by ylagzoul          #+#    #+#             */
-/*   Updated: 2025/03/09 18:15:58 by ylagzoul         ###   ########.fr       */
+/*   Updated: 2025/03/11 11:00:43 by ylagzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,12 @@ int	check_player_and_exit_collectible(char *inpt, char c)
 	return (a);
 }
 
-void	check1(int *t, char **inpt, int i)
+void	check1(int *t, char **inpt, int nbr_line)
 {
 	int	j;
 
 	j = 0;
-	while (i > 1)
+	while (nbr_line > 1)
 	{
 		if (t[j] != t[j + 1])
 		{
@@ -58,18 +58,18 @@ void	check1(int *t, char **inpt, int i)
 			print_error("Error\n Inconsistent map width detected.\n", inpt);
 		}
 		j++;
-		i--;
+		nbr_line--;
 	}
 }
 
-void	check_width(char **inpt, int k)
+void	check_width(char **inpt, int nbr_line)
 {
 	int	*t;
 	int	i;
 	int	j;
 
 	i = 0;
-	t = malloc(sizeof(int) * k);
+	t = malloc(sizeof(int) * nbr_line);
 	while (inpt[i])
 	{
 		j = 0;
@@ -85,11 +85,11 @@ void	check_width(char **inpt, int k)
 		t[i] = j;
 		i++;
 	}
-	check1(t, inpt, i);
+	check1(t, inpt, nbr_line);
 	free(t);
 }
 
-void	validate_map(char **input, int k, int a, int q)
+void	validate_map(char **input, int nbr_line, int a, int q)
 {
 	int	i;
 	int	j;
@@ -102,7 +102,7 @@ void	validate_map(char **input, int k, int a, int q)
 	{
 		if (check_map(input[i]))
 		{
-			if (i == 0 || (k - 1 == i && input[i]))
+			if (i == 0 || (nbr_line - 1 == i && input[i]))
 				check_wall(input[i], input);
 			j = j + check_player_and_exit_collectible(input[i], 'P');
 			t = t + check_player_and_exit_collectible(input[i], 'E');

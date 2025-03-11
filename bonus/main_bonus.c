@@ -6,7 +6,7 @@
 /*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 14:57:08 by ylagzoul          #+#    #+#             */
-/*   Updated: 2025/03/10 14:56:15 by ylagzoul         ###   ########.fr       */
+/*   Updated: 2025/03/11 12:45:47 by ylagzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,69 +66,7 @@ int	moving(int key, t_game *game)
 	return (0);
 }
 
-void	ft_ffftt(t_game *game, int i, int a)
-{
-	if (a == 1)
-	{
-		game->map[game->ym[i]][game->xm[i]] = '0';
-		game->map[game->ym[i]][game->xm[i] - 1] = 'M';
-		game->xm[i] = game->xm[i] - 1;
-		if (game->map[game->ym[i]][game->xm[i] - 1] != '0')
-			game->n[i] = 1;
-	}
-	else if (a == 2)
-	{
-		game->map[game->ym[i]][game->xm[i]] = '0';
-		game->map[game->ym[i]][game->xm[i] + 1] = 'M';
-		game->xm[i] = game->xm[i] + 1;
-		if (game->map[game->ym[i]][game->xm[i] + 1] != '0')
-			game->n[i] = 0;
-	}
-	else
-	{
-		if (game->n[i] == 1)
-			game->n[i] = 0;
-		else
-			game->n[i] = 1;
-	}
-}
-
-void ft_enemy(t_game *game, int i)
-{
-	if (game->map[game->ym[i]][game->xm[i] + 1] == 'P'
-		|| game->map[game->ym[i]][game->xm[i] - 1] == 'P')
-		return (ft_free_xm_ym_n(game), ft_free_strct(game), exit(0));
-	if (game->map[game->ym[i]][game->xm[i] + 1] == '0' && game->n[i] == 1)
-		ft_ffftt(game, i, 2);
-	else if (game->map[game->ym[i]][game->xm[i] - 1] == '0'
-			&& game->n[i] == 0)
-		ft_ffftt(game, i, 1);
-	else
-		ft_ffftt(game, i, 3);
-}
-
-int	moving_enemy(t_game *game)
-{
-	int	i;
-	int	a;
-	static int tem;
-
-	i = 0;
-	a = strlenm(game);
-	if (tem % 1000 != 0)
-		return (tem++, 0);
-	while (i < a)
-	{
-		ft_enemy(game, i);
-		i++;
-	}
-	if (tem == 500000)
-		tem = 1000;
-	ft_animate_collectible(game);
-	return (ft_mlx_imag1(game), tem++, 0);
-}
-
-void ft_animate_collectible(t_game * game)
+void	ft_animate_collectible(t_game *game)
 {
 	if (game->collectible == game->collectible0)
 	{
@@ -150,12 +88,12 @@ int	main(int ac, char *argv[])
 {
 	char	**string;
 	t_game	*game;
-	int		i;
+	int		nbr_line;
 
-	if (ac < 2)
+	if (ac != 2)
 		return (write(2, "Error\n No map file provided.\n", 29), 0);
-	i = ft_file_len(argv[1]);
-	string = ft_handel(i, argv[1]);
+	nbr_line = ft_file_len(argv[1]);
+	string = ft_handel(nbr_line, argv[1]);
 	if (!string)
 		return (0);
 	game = malloc(sizeof(t_game));
@@ -164,9 +102,9 @@ int	main(int ac, char *argv[])
 	game->map = string;
 	game->steps = 0;
 	game->c = 0;
-	ft_game(game, i);
+	ft_game(game, nbr_line);
 	mlx_hook(game->win, 17, 0, close_window, game);
-	mlx_hook(game->win, 2, 1L, moving, game);
+	mlx_key_hook(game->win, moving, game);
 	mlx_loop_hook(game->ptr, moving_enemy, game);
 	mlx_loop(game->ptr);
 	ft_free_xm_ym_n(game);
